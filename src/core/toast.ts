@@ -57,7 +57,11 @@ function dispatchToast<TData>(
   if (containers.size > 0) {
     eventManager.emit(Event.Show, content, options);
   } else {
-    queue.push({ content, options });
+    if (options.pushOnTopQueue) {
+      queue.unshift({ content, options });
+    } else {
+      queue.push({ content, options });
+    }
   }
 
   return options.toastId;
@@ -125,9 +129,9 @@ function handlePromise<TData = unknown, TError = unknown, TPending = unknown>(
     id = isStr(pending)
       ? toast.loading(pending, options)
       : toast.loading(pending.render, {
-          ...options,
-          ...(pending as ToastOptions)
-        });
+        ...options,
+        ...(pending as ToastOptions)
+      });
   }
 
   const resetParams = {

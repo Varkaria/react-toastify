@@ -46,11 +46,11 @@ export type ToastTransition =
  */
 export type ToastClassName =
   | ((context?: {
-      type?: TypeOptions;
-      defaultClassName?: string;
-      position?: ToastPosition;
-      rtl?: boolean;
-    }) => string)
+    type?: TypeOptions;
+    defaultClassName?: string;
+    position?: ToastPosition;
+    rtl?: boolean;
+  }) => string)
   | string;
 
 export interface ClearWaitingQueueParams {
@@ -97,9 +97,9 @@ interface CommonOptions {
    * To remove the close button pass `false`
    */
   closeButton?:
-    | boolean
-    | ((props: CloseButtonProps) => React.ReactNode)
-    | React.ReactElement<CloseButtonProps>;
+  | boolean
+  | ((props: CloseButtonProps) => React.ReactNode)
+  | React.ReactElement<CloseButtonProps>;
 
   /**
    * An optional css class to set for the progress bar.
@@ -243,6 +243,11 @@ export interface ToastOptions<Data = {}> extends CommonOptions {
    * Add a delay in ms before the toast appear.
    */
   delay?: number;
+
+  /**
+  * Add a option to push in first index or last index.
+  */
+  pushOnTopQueue?: boolean;
 
   isLoading?: boolean;
 
